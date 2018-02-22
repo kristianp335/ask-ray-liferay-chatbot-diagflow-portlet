@@ -1,0 +1,6 @@
+Bundle-Name: aiportlet
+Bundle-SymbolicName: aiportlet
+Bundle-Version: 1.0.0
+Bundle-ClassPath: ., lib/jersey-core-1.19.1.jar, lib/jersey-client-1.19.1.jar, lib/json-simple-1.1.jar
+-includeresource: lib/jersey-core-1.19.1.jar = jersey-core-1.19.1.jar, lib/jersey-client-1.19.1.jar = jersey-client-1.19.1.jar, lib/json-simple-1.1.jar = json-simple-1.1.jar
+-metatype: *
