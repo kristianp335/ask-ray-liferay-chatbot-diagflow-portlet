@@ -32,18 +32,6 @@ List<ApiAiData> apiAiDataList = (List) renderRequest.getAttribute("apiAiDataList
    	
 	</c:forEach>
 	
-	<div class="popover bs-popover-right">
-    <div class="arrow"></div>
-    <div class="inline-scroller">
-        <div class="popover-header">Popover right</div>
-        <div class="popover-body">
-            Viennese flavour cup eu, percolator froth ristretto mazagran caffeine. White roast seasonal, mocha trifecta, dripper caffeine spoon acerbic to go macchiato strong.
-        </div>
-    </div>
-</div>
-
-	
-
 </aui:container>	
 	
  	<aui:form action="${aiPostURL}" name='fm' method='post'>   
