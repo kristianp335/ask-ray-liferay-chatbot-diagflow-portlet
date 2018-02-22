@@ -1,6 +1,9 @@
 <%@ include file="/init.jsp" %>
 <% 
 List<ApiAiData> apiAiDataList = (List) renderRequest.getAttribute("apiAiDataList");
+String buttonText = (String) renderRequest.getAttribute("buttonText");
+String buttonUrl = (String) renderRequest.getAttribute("buttonUrl");
+System.out.println(buttonText);
 %>
 
 <p>
@@ -31,6 +34,12 @@ List<ApiAiData> apiAiDataList = (List) renderRequest.getAttribute("apiAiDataList
    	</c:choose>
    	
 	</c:forEach>
+	
+	<c:if test="${buttonText != 'blank'}">
+		<a href="${buttonUrl}"><div class = "btn btn-primary">${buttonText}</div></a>
+	</c:if>
+
+	
 	
 </aui:container>	
 	

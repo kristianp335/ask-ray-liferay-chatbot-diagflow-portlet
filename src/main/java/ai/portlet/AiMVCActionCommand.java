@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -18,13 +20,18 @@ import com.liferay.bnd.util.ConfigurableUtil;
 import com.liferay.kris.apiai.service.ApiAiDataLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
@@ -96,7 +103,16 @@ public class AiMVCActionCommand  extends BaseMVCActionCommand {
 			fulfillment = jsonResFulfillment.toString();
 			speech = (String) jsonResFulfillment.get("speech");
 			_apiAiDataLocalService.addApiAiData(serviceContext, yourQuery, authtoken, speech, action, fulfillment, result);	
-
+			ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			actionRequest.setAttribute("buttonText", "blank");
+			actionRequest.setAttribute("buttonUrl", "");
+			if (action.contains("blog") == true)
+			{
+			long plid = PortalUtil.getPlidFromPortletId(themeDisplay.getScopeGroupId(), false, "com_liferay_blogs_web_portlet_BlogsPortlet");
+			LiferayPortletURL portletUrl = PortletURLFactoryUtil.create(actionRequest,"com_liferay_blogs_web_portlet_BlogsPortlet" , plid, PortletRequest.RENDER_PHASE);
+			actionRequest.setAttribute("buttonText", "Open Blogs");
+			actionRequest.setAttribute("buttonUrl", portletUrl.toString());
+			}
 		} catch (ClientHandlerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
