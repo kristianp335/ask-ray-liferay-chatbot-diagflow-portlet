@@ -16,7 +16,7 @@ System.out.println(buttonText);
 	<c:forEach items="${apiAiDataList}" var="apiAiDataItem">
 	<c:choose>
     <c:when test="${apiAiDataItem.getType()=='query'}">
-		  	<div style="background-color: #4bb2ee; color: #fff; max-width: 250px; padding: 8px; border: solid 1px #1bd096; margin-bottom: 10px">
+		  	<div style="background-color: #4bb2ee; color: #fff; border-radius: 10px; max-width: 250px; padding: 10px; border: solid 1px #1bd096; margin-bottom: 10px">
        			<div><b>You said...</b></div>
        			<div>
            			${apiAiDataItem.getSpeech()}
@@ -24,7 +24,7 @@ System.out.println(buttonText);
     	  	</div>
    	</c:when>
    	<c:otherwise>
-		  	<div style="background-color: #1bd096; color: #fff;  max-width: 250px; padding: 8px; border: solid 1px #0ea877; margin-bottom: 10px; margin-left: 15px;">
+		  	<div style="background-color: #1bd096; color: #fff; border-radius: 10px;  max-width: 250px; padding: 10px; border: solid 1px #0ea877; margin-bottom: 10px; margin-left: 15px;">
        			<div><b>Ray said...</b></div>
        			<div>
            			${apiAiDataItem.getSpeech()}

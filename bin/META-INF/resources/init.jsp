@@ -22,19 +22,19 @@
 AiConfiguration aiConfiguration = (AiConfiguration) 	renderRequest.getAttribute(AiConfiguration.class.getName());
 
 	String authorisationToken = StringPool.BLANK;
+	String numberOfRecordsDisplayed = StringPool.BLANK;
 
 	
 
 	if (Validator.isNotNull(aiConfiguration)) {
-		authorisationToken =
-			portletPreferences.getValue(
-				"authorisationToken", aiConfiguration.authorisationToken());
-
-		
-	}else{
+		authorisationToken = portletPreferences.getValue("authorisationToken", aiConfiguration.authorisationToken());
+		numberOfRecordsDisplayed = portletPreferences.getValue("numberOfRecordsDisplayed", aiConfiguration.numberOfRecordsDisplayed());
+	
+	}
+	
+	else {
 		authorisationToken = portletPreferences.getValue("authorisationToken", "");
-
-		
+		numberOfRecordsDisplayed = portletPreferences.getValue("numberOfRecordsDisplayed", "");
 	}
 %>
 

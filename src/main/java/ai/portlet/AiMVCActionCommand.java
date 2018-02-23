@@ -67,14 +67,15 @@ public class AiMVCActionCommand  extends BaseMVCActionCommand {
 
 	private void _handleActionCommand(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException  {
 		String authtoken = "";
+		String numberOfRecordsDisplayed = "";
 		//my APIAI Diagflow key is 4304414ee84640ef8267ea82c383d6e9
 		if (actionRequest.getPreferences().getValue("authorisationToken", "") == null) {
 			authtoken = _aiConfiguration.authorisationToken();
 		}
 		else {
-			authtoken = actionRequest.getPreferences().getValue("authorisationToken", "");
+			authtoken = actionRequest.getPreferences().getValue("authorisationToken", "4304414ee84640ef8267ea82c383d6e9");
 		}
-		//get the query		
+		
 		String yourQuery = ParamUtil.getString(actionRequest, "query");
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest);
 	    //suppress session messages to make it more conversational

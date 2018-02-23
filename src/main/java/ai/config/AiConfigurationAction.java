@@ -54,12 +54,11 @@ public class AiConfigurationAction extends DefaultConfigurationAction {
  
         String authorisationToken = ParamUtil.getString(actionRequest, "authorisationToken");
         
-        System.out.println("authorisation token before being set is " + authorisationToken);
+        String numberOfRecordsDisplayed = ParamUtil.getString(actionRequest, "numberOfRecordsDisplayed");
         
-        
- 
         
         setPreference(actionRequest, "authorisationToken", authorisationToken);
+        setPreference(actionRequest, "numberOfRecordsDisplayed", numberOfRecordsDisplayed);
         
     
  

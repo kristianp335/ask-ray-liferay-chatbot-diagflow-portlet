@@ -11,5 +11,8 @@ import aQute.bnd.annotation.metatype.Meta;
     )
 public interface AiConfiguration {
     @Meta.AD(required = false)
-    public String authorisationToken();    
+    public String authorisationToken(); 
+    
+    @Meta.AD(required = false)
+    public String numberOfRecordsDisplayed();  
 }

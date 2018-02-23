@@ -15,9 +15,12 @@
  
     <aui:fieldset>
         <aui:input name="authorisationToken" label="Authorisation Token" value="<%=authorisationToken%>">
-            
+        </aui:input>
+        <aui:input name="numberOfRecordsDisplayed" label="Number of records to display" value="<%=numberOfRecordsDisplayed%>">
         </aui:input>
     </aui:fieldset>
+    
+    
  
     <aui:button-row>
         <aui:button type="submit"></aui:button>
