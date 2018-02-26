@@ -73,6 +73,10 @@ public class AiPortlet extends MVCPortlet {
 			System.out.println("The size of the data list is " + apiAiDataList.size());
 			//List<ApiAiData> apiAiDataList = _apiAiDataLocalService.getApiAiDatas(0, 1000);
 			renderRequest.setAttribute("apiAiDataList", apiAiDataList);
+			String speechTextValue = (String) renderRequest.getAttribute("speechText");
+			if (speechTextValue == null) {
+				renderRequest.setAttribute("speechText", "");
+			}
 			String buttonTextValue = (String) renderRequest.getAttribute("buttonText");
 			if (buttonTextValue == null) {
 			  renderRequest.setAttribute("buttonText", "blank");

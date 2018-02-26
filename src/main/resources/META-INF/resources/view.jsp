@@ -3,7 +3,7 @@
 List<ApiAiData> apiAiDataList = (List) renderRequest.getAttribute("apiAiDataList");
 String buttonText = (String) renderRequest.getAttribute("buttonText");
 String buttonUrl = (String) renderRequest.getAttribute("buttonUrl");
-System.out.println(buttonText);
+String speechText = (String) renderRequest.getAttribute("speechText");
 %>
 
 <p>
@@ -44,8 +44,43 @@ System.out.println(buttonText);
 </aui:container>	
 	
  	<aui:form action="${aiPostURL}" name='fm' method='post'>   
-    	<aui:input type="text" name="query" label="Your query:" inlineLabel="true"/>
-    	<aui:button type="submit" value="Go"/> 	   
+ 		<aui:input type="hidden" name="voice" value="textCommand" id="voice" />
+    	<aui:input type="text" name="query" id="query" label="Your query:" inlineLabel="true"/>
+    	<div>
+    		<div style="float:left;">
+    			<aui:button type="submit" id="go" value="Go"/> 
+    		</div>
+    		<div style="margin-left: 60px;">
+    			<aui:button  id = "recordButton" value="" cssClass="icon-microphone"/>   
+    		</div> 
+    	</div>
+    	<div style="clear:both;"></div>
 	</aui:form>
-	
+		
 </p>
+
+<aui:script>
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+var recognition = new SpeechRecognition();
+recognition.lang = 'en-UK';
+
+var synth = window.speechSynthesis;
+var msg = new SpeechSynthesisUtterance();
+msg.text = "${speechText}";
+synth.speak(msg);	
+
+$("#<portlet:namespace/>recordButton").on("click", function() {
+	recognition.start();
+	$("#<portlet:namespace/>query").children().text("Listening...");
+});
+
+recognition.onresult = function(event) {	
+	var speechResult = event.results["0"]["0"].transcript
+	$("#<portlet:namespace/>query").val(speechResult);
+	$("#<portlet:namespace/>voice").val("voiceCommand");
+	$("#<portlet:namespace/>go").click();	
+}
+
+
+</aui:script>

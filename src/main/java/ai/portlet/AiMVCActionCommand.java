@@ -77,6 +77,7 @@ public class AiMVCActionCommand  extends BaseMVCActionCommand {
 		}
 		
 		String yourQuery = ParamUtil.getString(actionRequest, "query");
+		String voice = ParamUtil.getString(actionRequest, "voice");
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest);
 	    //suppress session messages to make it more conversational
 	    SessionMessages.add(actionRequest, SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
@@ -107,12 +108,16 @@ public class AiMVCActionCommand  extends BaseMVCActionCommand {
 			ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			actionRequest.setAttribute("buttonText", "blank");
 			actionRequest.setAttribute("buttonUrl", "");
+			System.out.println("The voice command value is " + voice);
+			if(voice.contains("voice")) {
+				actionRequest.setAttribute("speechText", speech);	
+			}
 			if (action.contains("blog") == true)
 			{
-			long plid = PortalUtil.getPlidFromPortletId(themeDisplay.getScopeGroupId(), false, "com_liferay_blogs_web_portlet_BlogsPortlet");
-			LiferayPortletURL portletUrl = PortletURLFactoryUtil.create(actionRequest,"com_liferay_blogs_web_portlet_BlogsPortlet" , plid, PortletRequest.RENDER_PHASE);
-			actionRequest.setAttribute("buttonText", "Open Blogs");
-			actionRequest.setAttribute("buttonUrl", portletUrl.toString());
+				long plid = PortalUtil.getPlidFromPortletId(themeDisplay.getScopeGroupId(), false, "com_liferay_blogs_web_portlet_BlogsPortlet");
+				LiferayPortletURL portletUrl = PortletURLFactoryUtil.create(actionRequest,"com_liferay_blogs_web_portlet_BlogsPortlet" , plid, PortletRequest.RENDER_PHASE);
+				actionRequest.setAttribute("buttonText", "Open Blogs");
+				actionRequest.setAttribute("buttonUrl", portletUrl.toString());
 			}
 		} catch (ClientHandlerException e) {
 			// TODO Auto-generated catch block
