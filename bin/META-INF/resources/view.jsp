@@ -13,10 +13,20 @@ String speechText = (String) renderRequest.getAttribute("speechText");
 
 <aui:container markupView="lexicon">
 
+<%-- <c:if test="${something == 0}"><c:set var="className" value="zero_something"/></c:if> --%>
+
 <ul class="timeline">
 	<c:forEach items="${apiAiDataList}" var="apiAiDataItem">
 	<li class="timeline-item">
-		<div class="panel ${apiAiDataItem.getType()=='query' ? 'panel-primary' : 'panel-success'}">
+		<%-- <div class="panel ${apiAiDataItem.getType()=='query' ? 'panel-primary' : '${rayClass}' }"> --%>
+		<c:choose>
+ 			<c:when test="${apiAiDataItem.getType()=='query'}">
+  				<div class="panel  <%=youClass %>">
+ 			</c:when>
+	 		<c:otherwise>
+	  			<div class="panel <%=rayClass %>">
+	 		</c:otherwise>
+		</c:choose>
 			<div class="timeline-increment-icon">
                 <span class="timeline-icon"></span>
             </div>

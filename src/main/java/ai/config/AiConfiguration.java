@@ -18,4 +18,10 @@ public interface AiConfiguration {
     
     @Meta.AD(required = false)
     public String sortOrder();  
+    
+    @Meta.AD(required = false)
+    public String youClass();
+    
+    @Meta.AD(required = false)
+    public String rayClass();
 }
