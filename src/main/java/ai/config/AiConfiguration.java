@@ -14,5 +14,8 @@ public interface AiConfiguration {
     public String authorisationToken(); 
     
     @Meta.AD(required = false)
-    public String numberOfRecordsDisplayed();  
+    public String numberOfRecordsDisplayed();
+    
+    @Meta.AD(required = false)
+    public String sortOrder();  
 }

@@ -23,18 +23,20 @@ AiConfiguration aiConfiguration = (AiConfiguration) 	renderRequest.getAttribute(
 
 	String authorisationToken = StringPool.BLANK;
 	String numberOfRecordsDisplayed = StringPool.BLANK;
+	String sortOrder = StringPool.BLANK;
 
 	
 
 	if (Validator.isNotNull(aiConfiguration)) {
 		authorisationToken = portletPreferences.getValue("authorisationToken", aiConfiguration.authorisationToken());
 		numberOfRecordsDisplayed = portletPreferences.getValue("numberOfRecordsDisplayed", aiConfiguration.numberOfRecordsDisplayed());
-	
+		sortOrder = portletPreferences.getValue("sortOrder", aiConfiguration.sortOrder());
 	}
 	
 	else {
 		authorisationToken = portletPreferences.getValue("authorisationToken", "");
-		numberOfRecordsDisplayed = portletPreferences.getValue("numberOfRecordsDisplayed", "");
+		numberOfRecordsDisplayed = portletPreferences.getValue("numberOfRecordsDisplayed", "10");
+		sortOrder = portletPreferences.getValue("sortOrder", "asc");
 	}
 %>
 

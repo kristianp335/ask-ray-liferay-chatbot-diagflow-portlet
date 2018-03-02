@@ -58,18 +58,25 @@ public class AiPortlet extends MVCPortlet {
 				throws IOException, PortletException {
     	ServiceContext serviceContext;
     	String numberOfRecordsDisplayed = "";
+    	String sortOrder = "";
     	if (renderRequest.getPreferences().getValue("numberOfRecordsDisplayed", "") == null) {
 			numberOfRecordsDisplayed = _aiConfiguration.numberOfRecordsDisplayed();
 		}
 		else {
 			numberOfRecordsDisplayed = renderRequest.getPreferences().getValue("numberOfRecordsDisplayed", "6");
 		}
+    	if (renderRequest.getPreferences().getValue("sortOrder", "") == null) {
+			sortOrder = _aiConfiguration.sortOrder();
+		}
+		else {
+			sortOrder = renderRequest.getPreferences().getValue("sortOrder", "asc");
+		}
 		
 		int records = Integer.valueOf(numberOfRecordsDisplayed);
 		try {
 			serviceContext = ServiceContextFactory.getInstance(renderRequest);
 			System.out.println("Default Authorisation token = " + _aiConfiguration.authorisationToken());
-			List<ApiAiData> apiAiDataList = _apiAiDataLocalService.getRecentConversation(serviceContext, records);
+			List<ApiAiData> apiAiDataList = _apiAiDataLocalService.getRecentConversation(serviceContext, records, sortOrder);
 			System.out.println("The size of the data list is " + apiAiDataList.size());
 			//List<ApiAiData> apiAiDataList = _apiAiDataLocalService.getApiAiDatas(0, 1000);
 			renderRequest.setAttribute("apiAiDataList", apiAiDataList);

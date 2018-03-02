@@ -13,8 +13,20 @@ String speechText = (String) renderRequest.getAttribute("speechText");
 
 <aui:container markupView="lexicon">
 
+<ul class="timeline">
 	<c:forEach items="${apiAiDataList}" var="apiAiDataItem">
-	<c:choose>
+	<li class="timeline-item">
+		<div class="panel ${apiAiDataItem.getType()=='query' ? 'panel-primary' : 'panel-success'}">
+			<div class="timeline-increment-icon">
+                <span class="timeline-icon"></span>
+            </div>
+			<div class="panel-footer">
+				<strong>${apiAiDataItem.getType()=='query' ? 'You' : 'Ray'}: </strong>
+				${apiAiDataItem.getSpeech()}
+			</div>
+		</div>
+    </li>
+	<%-- <c:choose>
     <c:when test="${apiAiDataItem.getType()=='query'}">
 		  	<div style="background-color: #4bb2ee; color: #fff; border-radius: 10px; max-width: 250px; padding: 10px; border: solid 1px #1bd096; margin-bottom: 10px">
        			<div><b>You said...</b></div>
@@ -31,7 +43,7 @@ String speechText = (String) renderRequest.getAttribute("speechText");
         		</div>
     	  	</div>
    	</c:otherwise>
-   	</c:choose>
+   	</c:choose> --%>
    	
 	</c:forEach>
 	
@@ -39,7 +51,7 @@ String speechText = (String) renderRequest.getAttribute("speechText");
 		<a href="${buttonUrl}"><div class = "btn btn-primary">${buttonText}</div></a>
 	</c:if>
 
-	
+</ul>	
 	
 </aui:container>	
 	

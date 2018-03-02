@@ -18,6 +18,8 @@
         </aui:input>
         <aui:input name="numberOfRecordsDisplayed" label="Number of records to display" value="<%=numberOfRecordsDisplayed%>">
         </aui:input>
+        <aui:input name="sortOrder" label="Sort asc or desc" value="<%=sortOrder%>">
+        </aui:input>
     </aui:fieldset>
     
     

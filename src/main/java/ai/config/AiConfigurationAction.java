@@ -56,9 +56,12 @@ public class AiConfigurationAction extends DefaultConfigurationAction {
         
         String numberOfRecordsDisplayed = ParamUtil.getString(actionRequest, "numberOfRecordsDisplayed");
         
+        String sortOrder = ParamUtil.getString(actionRequest, "sortOrder");
+        
         
         setPreference(actionRequest, "authorisationToken", authorisationToken);
         setPreference(actionRequest, "numberOfRecordsDisplayed", numberOfRecordsDisplayed);
+        setPreference(actionRequest, "sortOrder", sortOrder);
         
     
  
