@@ -57,13 +57,14 @@ public class AiPortlet extends MVCPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 				throws IOException, PortletException {
     	ServiceContext serviceContext;
-    	String numberOfRecordsDisplayed = "";
+    	String numberOfRecordsDisplayed = "6";
     	String sortOrder = "";
     	if (renderRequest.getPreferences().getValue("numberOfRecordsDisplayed", "") == null) {
 			numberOfRecordsDisplayed = _aiConfiguration.numberOfRecordsDisplayed();
 		}
 		else {
 			numberOfRecordsDisplayed = renderRequest.getPreferences().getValue("numberOfRecordsDisplayed", "6");
+			if (numberOfRecordsDisplayed.isEmpty()) numberOfRecordsDisplayed = "6";
 		}
     	if (renderRequest.getPreferences().getValue("sortOrder", "") == null) {
 			sortOrder = _aiConfiguration.sortOrder();

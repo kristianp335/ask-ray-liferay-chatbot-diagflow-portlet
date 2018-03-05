@@ -74,6 +74,7 @@ public class AiMVCActionCommand  extends BaseMVCActionCommand {
 		}
 		else {
 			authtoken = actionRequest.getPreferences().getValue("authorisationToken", "4304414ee84640ef8267ea82c383d6e9");
+			if (authtoken.isEmpty()) authtoken = "4304414ee84640ef8267ea82c383d6e9";
 		}
 		
 		String yourQuery = ParamUtil.getString(actionRequest, "query");
