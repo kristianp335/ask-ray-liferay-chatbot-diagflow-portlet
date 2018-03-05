@@ -20,6 +20,8 @@
         </aui:input>
         <aui:input name="sortOrder" label="Sort asc or desc" value="<%=sortOrder%>">
         </aui:input>
+        <aui:input name="useTimeline" label="use Timeline view" value="<%=useTimeline%>">
+        </aui:input>
         <aui:input name="youClass" label="Class to use for formatting You" value="<%=youClass%>">
         </aui:input>
         <aui:input name="rayClass" label="Class to use for formatting Ray" value="<%=rayClass%>">

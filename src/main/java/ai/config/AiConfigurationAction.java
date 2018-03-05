@@ -55,12 +55,14 @@ public class AiConfigurationAction extends DefaultConfigurationAction {
         String sortOrder = ParamUtil.getString(actionRequest, "sortOrder");        
         String youClass = ParamUtil.getString(actionRequest, "youClass");        
         String rayClass = ParamUtil.getString(actionRequest, "rayClass");
+        String useTimeline = ParamUtil.getString(actionRequest, "useTimeline");
         
         setPreference(actionRequest, "authorisationToken", authorisationToken);
         setPreference(actionRequest, "numberOfRecordsDisplayed", numberOfRecordsDisplayed);
         setPreference(actionRequest, "sortOrder", sortOrder);
         setPreference(actionRequest, "youClass", youClass);
         setPreference(actionRequest, "rayClass", rayClass);
+        setPreference(actionRequest, "useTimeline", useTimeline);
     
  
         super.processAction(portletConfig, actionRequest, actionResponse);

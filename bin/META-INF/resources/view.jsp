@@ -13,12 +13,10 @@ String speechText = (String) renderRequest.getAttribute("speechText");
 
 <aui:container markupView="lexicon">
 
-<%-- <c:if test="${something == 0}"><c:set var="className" value="zero_something"/></c:if> --%>
-
-<ul class="timeline">
+<% if (useTimeline.equalsIgnoreCase("true")) { %>
+<ul class="timeline" style="${useTimeline == 'true' ? '' : 'display: none'}">
 	<c:forEach items="${apiAiDataList}" var="apiAiDataItem">
 	<li class="timeline-item">
-		<%-- <div class="panel ${apiAiDataItem.getType()=='query' ? 'panel-primary' : '${rayClass}' }"> --%>
 		<c:choose>
  			<c:when test="${apiAiDataItem.getType()=='query'}">
   				<div class="panel  <%=youClass %>">
@@ -41,8 +39,32 @@ String speechText = (String) renderRequest.getAttribute("speechText");
 	<c:if test="${buttonText != 'blank'}">
 		<a href="${buttonUrl}"><div class = "btn btn-primary">${buttonText}</div></a>
 	</c:if>
+</ul>
+<% } %>
 
-</ul>	
+
+<% if (!useTimeline.equalsIgnoreCase("true")) { %>
+<c:forEach items="${apiAiDataList}" var="apiAiDataItem">
+	<c:choose>
+	    <c:when test="${apiAiDataItem.getType()=='query'}">
+			  	<div style="background-color: #4bb2ee; color: #fff; border-radius: 10px; max-width: 250px; padding: 10px; border: solid 1px #1bd096; margin-bottom: 10px">
+	       			<div><b>You said...</b></div>
+	       			<div>
+	           			${apiAiDataItem.getSpeech()}
+	        		</div>
+	    	  	</div>
+	   	</c:when>
+	   	<c:otherwise>
+			  	<div style="background-color: #1bd096; color: #fff; border-radius: 10px;  max-width: 250px; padding: 10px; border: solid 1px #0ea877; margin-bottom: 10px; margin-left: 15px;">
+	       			<div><b>Ray said...</b></div>
+	       			<div>
+	           			${apiAiDataItem.getSpeech()}
+	        		</div>
+	    	  	</div>
+	   	</c:otherwise>
+	</c:choose>	
+</c:forEach>
+<% } %>
 	
 </aui:container>	
 	

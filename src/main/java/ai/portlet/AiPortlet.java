@@ -90,6 +90,7 @@ public class AiPortlet extends MVCPortlet {
 			if (buttonTextValue == null) {
 			  renderRequest.setAttribute("buttonText", "blank");
 			}
+			renderRequest.setAttribute("useTimeline", _aiConfiguration.useTimeline());
 			
 			super.doView(renderRequest, renderResponse);
 		} catch (PortalException e) {

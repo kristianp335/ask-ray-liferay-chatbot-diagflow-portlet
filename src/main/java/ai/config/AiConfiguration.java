@@ -19,9 +19,15 @@ public interface AiConfiguration {
     @Meta.AD(deflt="asc",required = false)
     public String sortOrder();  
     
-    @Meta.AD(deflt="panel-succes",required = false)
+    @Meta.AD(deflt="panel-success",required = false)
     public String youClass();
     
     @Meta.AD(deflt="panel-primary", required = false)
     public String rayClass();
+    
+    @Meta.AD(deflt="true", required = false)
+    public String useTimeline();
+    
 }
+
+

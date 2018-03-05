@@ -25,7 +25,8 @@ AiConfiguration aiConfiguration = (AiConfiguration) 	renderRequest.getAttribute(
 	String numberOfRecordsDisplayed = StringPool.BLANK;
 	String sortOrder = StringPool.BLANK;
 	String youClass = StringPool.BLANK;
-	String rayClass = "panel-success";
+	String rayClass = StringPool.BLANK;
+	String useTimeline = StringPool.BLANK;
 
 	if (Validator.isNotNull(aiConfiguration)) {
 		authorisationToken = portletPreferences.getValue("authorisationToken", aiConfiguration.authorisationToken());
@@ -33,14 +34,13 @@ AiConfiguration aiConfiguration = (AiConfiguration) 	renderRequest.getAttribute(
 		sortOrder = portletPreferences.getValue("sortOrder", aiConfiguration.sortOrder());
 		youClass = portletPreferences.getValue("youClass", aiConfiguration.youClass());
 		rayClass = portletPreferences.getValue("rayClass", aiConfiguration.rayClass());
+		useTimeline = portletPreferences.getValue("useTimeline", aiConfiguration.useTimeline());
 	} else {
 		authorisationToken = portletPreferences.getValue("authorisationToken", "");
 		numberOfRecordsDisplayed = portletPreferences.getValue("numberOfRecordsDisplayed", "10");
 		youClass = portletPreferences.getValue("youClass", "panel-primary");
-		
-		//portletPreferences.setValue("rayClass", "panel-success");
-		
 		rayClass = portletPreferences.getValue("rayClass", "panel-success");
+		useTimeline = portletPreferences.getValue("useTimeline", "true");
 	}
 %>
 
