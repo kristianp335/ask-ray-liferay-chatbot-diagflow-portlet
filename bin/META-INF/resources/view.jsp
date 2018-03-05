@@ -36,25 +36,6 @@ String speechText = (String) renderRequest.getAttribute("speechText");
 			</div>
 		</div>
     </li>
-	<%-- <c:choose>
-    <c:when test="${apiAiDataItem.getType()=='query'}">
-		  	<div style="background-color: #4bb2ee; color: #fff; border-radius: 10px; max-width: 250px; padding: 10px; border: solid 1px #1bd096; margin-bottom: 10px">
-       			<div><b>You said...</b></div>
-       			<div>
-           			${apiAiDataItem.getSpeech()}
-        		</div>
-    	  	</div>
-   	</c:when>
-   	<c:otherwise>
-		  	<div style="background-color: #1bd096; color: #fff; border-radius: 10px;  max-width: 250px; padding: 10px; border: solid 1px #0ea877; margin-bottom: 10px; margin-left: 15px;">
-       			<div><b>Ray said...</b></div>
-       			<div>
-           			${apiAiDataItem.getSpeech()}
-        		</div>
-    	  	</div>
-   	</c:otherwise>
-   	</c:choose> --%>
-   	
 	</c:forEach>
 	
 	<c:if test="${buttonText != 'blank'}">

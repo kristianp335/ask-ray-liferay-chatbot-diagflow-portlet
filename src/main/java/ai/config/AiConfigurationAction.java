@@ -50,18 +50,11 @@ public class AiConfigurationAction extends DefaultConfigurationAction {
     public void processAction(PortletConfig portletConfig, ActionRequest actionRequest, ActionResponse actionResponse)
             throws Exception {
  
-        
- 
-        String authorisationToken = ParamUtil.getString(actionRequest, "authorisationToken");
-        
-        String numberOfRecordsDisplayed = ParamUtil.getString(actionRequest, "numberOfRecordsDisplayed");
-        
-        String sortOrder = ParamUtil.getString(actionRequest, "sortOrder");
-        
-        String youClass = ParamUtil.getString(actionRequest, "youClass");
-        
+        String authorisationToken = ParamUtil.getString(actionRequest, "authorisationToken");        
+        String numberOfRecordsDisplayed = ParamUtil.getString(actionRequest, "numberOfRecordsDisplayed");        
+        String sortOrder = ParamUtil.getString(actionRequest, "sortOrder");        
+        String youClass = ParamUtil.getString(actionRequest, "youClass");        
         String rayClass = ParamUtil.getString(actionRequest, "rayClass");
-        
         
         setPreference(actionRequest, "authorisationToken", authorisationToken);
         setPreference(actionRequest, "numberOfRecordsDisplayed", numberOfRecordsDisplayed);

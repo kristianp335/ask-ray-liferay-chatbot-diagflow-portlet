@@ -10,18 +10,18 @@ import aQute.bnd.annotation.metatype.Meta;
         id = "ai.config.AiConfiguration"
     )
 public interface AiConfiguration {
-    @Meta.AD(required = false)
+    @Meta.AD(deflt="4304414ee84640ef8267ea82c383d6e9",required = false)
     public String authorisationToken(); 
     
-    @Meta.AD(required = false)
+    @Meta.AD(deflt="6",required = false)
     public String numberOfRecordsDisplayed();
     
-    @Meta.AD(required = false)
+    @Meta.AD(deflt="asc",required = false)
     public String sortOrder();  
     
-    @Meta.AD(required = false)
+    @Meta.AD(deflt="panel-succes",required = false)
     public String youClass();
     
-    @Meta.AD(required = false)
+    @Meta.AD(deflt="panel-primary", required = false)
     public String rayClass();
 }
