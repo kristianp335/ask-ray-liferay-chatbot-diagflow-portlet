@@ -22,6 +22,8 @@
         </aui:input>
         <aui:input name="useTimeline" label="use Timeline view" value="<%=useTimeline%>">
         </aui:input>
+        <aui:input name="centerTimeline" label="Center timeline" value="<%=centerTimeline%>">
+        </aui:input>
         <aui:input name="youClass" label="Class to use for formatting You" value="<%=youClass%>">
         </aui:input>
         <aui:input name="rayClass" label="Class to use for formatting Ray" value="<%=rayClass%>">

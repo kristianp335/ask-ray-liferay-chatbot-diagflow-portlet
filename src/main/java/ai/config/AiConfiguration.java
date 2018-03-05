@@ -28,6 +28,9 @@ public interface AiConfiguration {
     @Meta.AD(deflt="true", required = false)
     public String useTimeline();
     
+    @Meta.AD(deflt="true", required = false)
+    public String centerTimeline();
+    
 }
 
 

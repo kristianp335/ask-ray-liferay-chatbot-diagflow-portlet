@@ -56,6 +56,7 @@ public class AiConfigurationAction extends DefaultConfigurationAction {
         String youClass = ParamUtil.getString(actionRequest, "youClass");        
         String rayClass = ParamUtil.getString(actionRequest, "rayClass");
         String useTimeline = ParamUtil.getString(actionRequest, "useTimeline");
+        String centerTimeline = ParamUtil.getString(actionRequest, "centerTimeline");
         
         setPreference(actionRequest, "authorisationToken", authorisationToken);
         setPreference(actionRequest, "numberOfRecordsDisplayed", numberOfRecordsDisplayed);
@@ -63,6 +64,7 @@ public class AiConfigurationAction extends DefaultConfigurationAction {
         setPreference(actionRequest, "youClass", youClass);
         setPreference(actionRequest, "rayClass", rayClass);
         setPreference(actionRequest, "useTimeline", useTimeline);
+        setPreference(actionRequest, "centerTimeline", centerTimeline);
     
  
         super.processAction(portletConfig, actionRequest, actionResponse);

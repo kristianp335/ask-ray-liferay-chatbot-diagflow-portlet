@@ -27,6 +27,7 @@ AiConfiguration aiConfiguration = (AiConfiguration) 	renderRequest.getAttribute(
 	String youClass = StringPool.BLANK;
 	String rayClass = StringPool.BLANK;
 	String useTimeline = StringPool.BLANK;
+	String centerTimeline = StringPool.BLANK;
 
 	if (Validator.isNotNull(aiConfiguration)) {
 		authorisationToken = portletPreferences.getValue("authorisationToken", aiConfiguration.authorisationToken());
@@ -35,12 +36,14 @@ AiConfiguration aiConfiguration = (AiConfiguration) 	renderRequest.getAttribute(
 		youClass = portletPreferences.getValue("youClass", aiConfiguration.youClass());
 		rayClass = portletPreferences.getValue("rayClass", aiConfiguration.rayClass());
 		useTimeline = portletPreferences.getValue("useTimeline", aiConfiguration.useTimeline());
+		centerTimeline = portletPreferences.getValue("centerTimeline", aiConfiguration.centerTimeline());
 	} else {
 		authorisationToken = portletPreferences.getValue("authorisationToken", "");
 		numberOfRecordsDisplayed = portletPreferences.getValue("numberOfRecordsDisplayed", "10");
 		youClass = portletPreferences.getValue("youClass", "panel-primary");
 		rayClass = portletPreferences.getValue("rayClass", "panel-success");
 		useTimeline = portletPreferences.getValue("useTimeline", "true");
+		centerTimeline = portletPreferences.getValue("centerTimeline", "true");
 	}
 %>
 
