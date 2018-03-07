@@ -35,10 +35,6 @@ String speechText = (String) renderRequest.getAttribute("speechText");
 			</div>
 	    </li>
 		</c:forEach>
-		
-		<c:if test="${buttonText != 'blank'}">
-			<a href="${buttonUrl}"><div class = "btn btn-primary">${buttonText}</div></a>
-		</c:if>
 	</ul>
 </c:if>
 
@@ -63,6 +59,10 @@ String speechText = (String) renderRequest.getAttribute("speechText");
 		   	</c:otherwise>
 		</c:choose>	
 	</c:forEach>
+</c:if>
+
+<c:if test="${buttonText != 'blank'}">
+	<a href="${buttonUrl}"><div class = "btn btn-primary">${buttonText}</div></a>
 </c:if>
 	
 </aui:container>	
