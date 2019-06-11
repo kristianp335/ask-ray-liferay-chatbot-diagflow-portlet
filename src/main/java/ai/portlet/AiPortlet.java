@@ -1,9 +1,8 @@
 package ai.portlet;
 
-import com.liferay.blogs.kernel.service.BlogsEntryLocalService;
-import com.liferay.bnd.util.ConfigurableUtil;
 import com.liferay.kris.apiai.model.ApiAiData;
 import com.liferay.kris.apiai.service.ApiAiDataLocalService;
+import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.PortletPreferences;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
@@ -56,6 +55,16 @@ public class AiPortlet extends MVCPortlet {
 	public void doView(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 				throws IOException, PortletException {
+    	
+    	String normalString = "HelloWorld";
+    	char[] normalStringCharArray = normalString.toCharArray();
+    	
+    	String reverseString = "";
+    	for(int i = normalStringCharArray.length - 1; i >= 0; i--)
+    	{
+    		reverseString = reverseString + normalStringCharArray[i];
+    	}
+    	System.out.println("The reverse string is " + reverseString);
     	ServiceContext serviceContext;
     	String numberOfRecordsDisplayed = "";
     	String sortOrder = "";

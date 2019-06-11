@@ -42,7 +42,7 @@ String speechText = (String) renderRequest.getAttribute("speechText");
 	<c:forEach items="${apiAiDataList}" var="apiAiDataItem">
 		<c:choose>
 		    <c:when test="${apiAiDataItem.getType()=='query'}">
-				  	<div style="background-color: #4bb2ee; color: #fff; border-radius: 10px; max-width: 250px; padding: 10px; border: solid 1px #1bd096; margin-bottom: 10px">
+				  	<div style="background-color: #000; color: #fff; border-radius: 10px; max-width: 250px; padding: 10px; border: solid 1px #000; margin-bottom: 10px">
 		       			<div><b>You said...</b></div>
 		       			<div>
 		           			${apiAiDataItem.getSpeech()}
@@ -50,7 +50,7 @@ String speechText = (String) renderRequest.getAttribute("speechText");
 		    	  	</div>
 		   	</c:when>
 		   	<c:otherwise>
-				  	<div style="background-color: #1bd096; color: #fff; border-radius: 10px;  max-width: 250px; padding: 10px; border: solid 1px #0ea877; margin-bottom: 10px; margin-left: 15px;">
+				  	<div style="background-color: #e60000; color: #fff; border-radius: 10px;  max-width: 250px; padding: 10px; border: solid 1px #e60000; margin-bottom: 10px; margin-left: 15px;">
 		       			<div><b>Ray said...</b></div>
 		       			<div>
 		           			${apiAiDataItem.getSpeech()}

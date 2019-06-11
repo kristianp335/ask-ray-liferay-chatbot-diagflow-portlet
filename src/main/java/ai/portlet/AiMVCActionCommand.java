@@ -1,5 +1,6 @@
 package ai.portlet;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
+import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -16,8 +18,9 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.component.annotations.Reference;
 
-import com.liferay.bnd.util.ConfigurableUtil;
+
 import com.liferay.kris.apiai.service.ApiAiDataLocalService;
+import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
@@ -120,6 +123,12 @@ public class AiMVCActionCommand  extends BaseMVCActionCommand {
 				actionRequest.setAttribute("buttonText", "Open Blogs");
 				actionRequest.setAttribute("buttonUrl", portletUrl.toString());
 			}
+			if( action.contains("setup-email")) {
+				long androidPlid = themeDisplay.getPlid();
+				LiferayPortletURL androidPortletUrl = PortletURLFactoryUtil.create(actionRequest,"com_liferay_blogs_web_portlet_BlogsPortlet" , androidPlid, PortletRequest.RENDER_PHASE);
+				androidPortletUrl.setParameter("categoryId", "63160");	
+				actionResponse.sendRedirect(androidPortletUrl.toString());
+			}
 		} catch (ClientHandlerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -127,6 +136,9 @@ public class AiMVCActionCommand  extends BaseMVCActionCommand {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
