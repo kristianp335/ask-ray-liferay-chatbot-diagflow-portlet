@@ -69,19 +69,21 @@ String speechText = (String) renderRequest.getAttribute("speechText");
 	
  	<aui:form action="${aiPostURL}" name='fm' method='post'>   
  		<aui:input type="hidden" name="voice" value="textCommand" id="voice" />
-    	<aui:input type="text" name="query" id="query" label="Your query:" inlineLabel="true"/>
+    	<aui:input type="text" name="query" id="query" label="" inlineLabel="false"/>
     	<div>
     		<div style="float:left;">
     			<aui:button type="submit" id="go" value="Go"/> 
     		</div>
     		<div style="margin-left: 60px;">
-    			<aui:button  id = "recordButton" value="" cssClass="icon-microphone"/>   
+    			<aui:button  id = "recordButton" value="Speak" cssClass="btn btn-primary"/>
     		</div> 
     	</div>
     	<div style="clear:both;"></div>
 	</aui:form>
 		
 </p>
+
+
 
 <aui:script>
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
