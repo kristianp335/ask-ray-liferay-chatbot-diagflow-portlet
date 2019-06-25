@@ -56,15 +56,7 @@ public class AiPortlet extends MVCPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 				throws IOException, PortletException {
     	
-    	String normalString = "HelloWorld";
-    	char[] normalStringCharArray = normalString.toCharArray();
     	
-    	String reverseString = "";
-    	for(int i = normalStringCharArray.length - 1; i >= 0; i--)
-    	{
-    		reverseString = reverseString + normalStringCharArray[i];
-    	}
-    	System.out.println("The reverse string is " + reverseString);
     	ServiceContext serviceContext;
     	String numberOfRecordsDisplayed = "";
     	String sortOrder = "";

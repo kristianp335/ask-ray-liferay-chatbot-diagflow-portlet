@@ -40,6 +40,8 @@ import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.core.impl.provider.entity.StringProvider;
 
 import ai.config.AiConfiguration;
 
@@ -85,7 +87,9 @@ public class AiMVCActionCommand  extends BaseMVCActionCommand {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest);
 	    //suppress session messages to make it more conversational
 	    SessionMessages.add(actionRequest, SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
-		Client client = new Client(); 
+	    DefaultClientConfig defaultClientConfig = new DefaultClientConfig();
+		defaultClientConfig.getClasses().add(StringProvider.class);
+		Client client = Client.create(defaultClientConfig);
 		WebResource webResource = client.resource("https://api.api.ai/v1/query?v=20150910");
 	    String mySessionId = actionRequest.getPortletSession().getId();	
       	String input = "{\"query\":\"" + yourQuery + "\", \"lang\": \"en\", \"sessionId\": \"" + mySessionId + "\"}";
@@ -97,7 +101,9 @@ public class AiMVCActionCommand  extends BaseMVCActionCommand {
 		String speech = "";
 		String fulfillment = "";
 		String action = "";
-		String result = "";			
+		String result = "";
+		
+		
 		try {
 			json = (JSONObject) parser.parse(response.getEntity(String.class));
 			JSONObject jsonRes = (JSONObject) json.get("result");
