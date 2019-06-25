@@ -62,7 +62,7 @@ String speechText = (String) renderRequest.getAttribute("speechText");
 </c:if>
 
 <c:if test="${buttonText != 'blank'}">
-	<a href="${buttonUrl}"><div class = "btn btn-primary">${buttonText}</div></a>
+	<a href="${buttonUrl}"><div class = "btn btn-primary" style = "margin-bottom: 20px">${buttonText}</div></a>
 </c:if>
 	
 </aui:container>	
