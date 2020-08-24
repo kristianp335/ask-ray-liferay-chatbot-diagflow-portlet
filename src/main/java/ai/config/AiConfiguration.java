@@ -10,8 +10,8 @@ import aQute.bnd.annotation.metatype.Meta;
         id = "ai.config.AiConfiguration"
     )
 public interface AiConfiguration {
-    @Meta.AD(deflt="4304414ee84640ef8267ea82c383d6e9",required = false)
-    public String authorisationToken(); 
+    @Meta.AD(deflt="liferay-onhm",required = false)
+    public String dialogflowAgent(); 
     
     @Meta.AD(deflt="6",required = false)
     public String numberOfRecordsDisplayed();

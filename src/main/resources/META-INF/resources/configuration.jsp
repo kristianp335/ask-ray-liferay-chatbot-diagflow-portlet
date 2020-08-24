@@ -14,7 +14,7 @@
         value="<%=configurationRenderURL%>" />
  
     <aui:fieldset>
-        <aui:input name="authorisationToken" label="Authorisation Token" value="<%=authorisationToken%>">
+        <aui:input name="dialogflowAgent" label="Dialogflow Agent" value="<%=dialogflowAgent%>">
         </aui:input>
         <aui:input name="numberOfRecordsDisplayed" label="Number of records to display" value="<%=numberOfRecordsDisplayed%>">
         </aui:input>

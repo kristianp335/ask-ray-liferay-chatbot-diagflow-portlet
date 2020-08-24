@@ -8,7 +8,7 @@
 <%@page import="com.liferay.portal.kernel.util.Validator"%>
 <%@page import="com.liferay.portal.kernel.util.StringPool"%>
 <%@page import="com.liferay.portal.kernel.util.Constants"%>
-<%@page import="com.liferay.kris.apiai.model.ApiAiData"%>
+<%@page import="com.liferay.kris.dialogflow.model.ApiAiData"%>
 <%@page import="java.util.List"%>
 
 
@@ -21,7 +21,7 @@
 <%
 AiConfiguration aiConfiguration = (AiConfiguration) 	renderRequest.getAttribute(AiConfiguration.class.getName());
 
-	String authorisationToken = StringPool.BLANK;
+	String dialogflowAgent = StringPool.BLANK;
 	String numberOfRecordsDisplayed = StringPool.BLANK;
 	String sortOrder = StringPool.BLANK;
 	String youClass = StringPool.BLANK;
@@ -30,7 +30,7 @@ AiConfiguration aiConfiguration = (AiConfiguration) 	renderRequest.getAttribute(
 	String centerTimeline = StringPool.BLANK;
 
 	if (Validator.isNotNull(aiConfiguration)) {
-		authorisationToken = portletPreferences.getValue("authorisationToken", aiConfiguration.authorisationToken());
+		dialogflowAgent = portletPreferences.getValue("dialogflowAgent", aiConfiguration.dialogflowAgent());
 		numberOfRecordsDisplayed = portletPreferences.getValue("numberOfRecordsDisplayed", aiConfiguration.numberOfRecordsDisplayed());
 		sortOrder = portletPreferences.getValue("sortOrder", aiConfiguration.sortOrder());
 		youClass = portletPreferences.getValue("youClass", aiConfiguration.youClass());
@@ -38,7 +38,7 @@ AiConfiguration aiConfiguration = (AiConfiguration) 	renderRequest.getAttribute(
 		useTimeline = portletPreferences.getValue("useTimeline", aiConfiguration.useTimeline());
 		centerTimeline = portletPreferences.getValue("centerTimeline", aiConfiguration.centerTimeline());
 	} else {
-		authorisationToken = portletPreferences.getValue("authorisationToken", "");
+		dialogflowAgent = portletPreferences.getValue("dialogflowAgent", "");
 		numberOfRecordsDisplayed = portletPreferences.getValue("numberOfRecordsDisplayed", "10");
 		youClass = portletPreferences.getValue("youClass", "panel-primary");
 		rayClass = portletPreferences.getValue("rayClass", "panel-success");

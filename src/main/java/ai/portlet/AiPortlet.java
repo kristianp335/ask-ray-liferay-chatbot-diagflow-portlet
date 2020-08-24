@@ -1,7 +1,7 @@
 package ai.portlet;
 
-import com.liferay.kris.apiai.model.ApiAiData;
-import com.liferay.kris.apiai.service.ApiAiDataLocalService;
+import com.liferay.kris.dialogflow.model.ApiAiData;
+import com.liferay.kris.dialogflow.service.ApiAiDataLocalService;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.PortletPreferences;
@@ -78,7 +78,6 @@ public class AiPortlet extends MVCPortlet {
 		int records = Integer.valueOf(numberOfRecordsDisplayed);
 		try {
 			serviceContext = ServiceContextFactory.getInstance(renderRequest);
-			System.out.println("Default Authorisation token = " + _aiConfiguration.authorisationToken());
 			List<ApiAiData> apiAiDataList = _apiAiDataLocalService.getRecentConversation(serviceContext, records, sortOrder);
 			System.out.println("The size of the data list is " + apiAiDataList.size());
 			//List<ApiAiData> apiAiDataList = _apiAiDataLocalService.getApiAiDatas(0, 1000);

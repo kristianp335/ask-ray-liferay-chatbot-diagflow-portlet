@@ -50,7 +50,7 @@ public class AiConfigurationAction extends DefaultConfigurationAction {
     public void processAction(PortletConfig portletConfig, ActionRequest actionRequest, ActionResponse actionResponse)
             throws Exception {
  
-        String authorisationToken = ParamUtil.getString(actionRequest, "authorisationToken");        
+        String dialogflowAgent = ParamUtil.getString(actionRequest, "dialogflowAgent");        
         String numberOfRecordsDisplayed = ParamUtil.getString(actionRequest, "numberOfRecordsDisplayed");        
         String sortOrder = ParamUtil.getString(actionRequest, "sortOrder");        
         String youClass = ParamUtil.getString(actionRequest, "youClass");        
@@ -58,7 +58,7 @@ public class AiConfigurationAction extends DefaultConfigurationAction {
         String useTimeline = ParamUtil.getString(actionRequest, "useTimeline");
         String centerTimeline = ParamUtil.getString(actionRequest, "centerTimeline");
         
-        setPreference(actionRequest, "authorisationToken", authorisationToken);
+        setPreference(actionRequest, "dialogflowAgent", dialogflowAgent);
         setPreference(actionRequest, "numberOfRecordsDisplayed", numberOfRecordsDisplayed);
         setPreference(actionRequest, "sortOrder", sortOrder);
         setPreference(actionRequest, "youClass", youClass);

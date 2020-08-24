@@ -1,15 +1,16 @@
 package ai.portlet;
 
 import java.io.IOException;
-import java.util.Date;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletRequest;
-import javax.portlet.PortletURL;
-import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -18,18 +19,18 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.component.annotations.Reference;
 
-
-import com.liferay.kris.apiai.service.ApiAiDataLocalService;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+import com.liferay.kris.dialogflow.service.ApiAiDataLocalService;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.User;
+
+
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
-import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -69,19 +70,30 @@ public class AiMVCActionCommand  extends BaseMVCActionCommand {
 	protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 			_handleActionCommand(actionRequest, actionResponse);
 	}
+	
+	public String getAccessToken() throws IOException {
+		String accessToken =  null;
+		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+		InputStream stream = classloader.getResourceAsStream("liferay-onhm-1c5c15d292d4.json");
+		List<String> scopes = Arrays.asList("https://www.googleapis.com/auth/cloud-platform", "https://www.googleapis.com/auth/dialogflow"); 
+		GoogleCredential credentials = GoogleCredential.fromStream(stream).createScoped(scopes);
+		credentials.refreshToken();
+		accessToken = credentials.getAccessToken();
+		System.out.println("Access token for dialog flow standard portlet is " + accessToken);
+		return accessToken;	
+	}
 
-	private void _handleActionCommand(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException  {
+	private void _handleActionCommand(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException, IOException   {
 		String authtoken = "";
-		String numberOfRecordsDisplayed = "";
-		//my APIAI Diagflow key is 4304414ee84640ef8267ea82c383d6e9
-		if (actionRequest.getPreferences().getValue("authorisationToken", "") == null) {
-			authtoken = _aiConfiguration.authorisationToken();
+		String dialogflowAgent;
+		if (actionRequest.getPreferences().getValue("dialogflowAgent", "") == null) {
+			dialogflowAgent = _aiConfiguration.dialogflowAgent();
 		}
 		else {
-			authtoken = actionRequest.getPreferences().getValue("authorisationToken", "4304414ee84640ef8267ea82c383d6e9");
-			if (authtoken.isEmpty()) authtoken = "4304414ee84640ef8267ea82c383d6e9";
+			dialogflowAgent = actionRequest.getPreferences().getValue("dialogflowAgent", "");
 		}
-		
+		String numberOfRecordsDisplayed = "";
+		authtoken = this.getAccessToken();		
 		String yourQuery = ParamUtil.getString(actionRequest, "query");
 		String voice = ParamUtil.getString(actionRequest, "voice");
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest);
@@ -90,10 +102,11 @@ public class AiMVCActionCommand  extends BaseMVCActionCommand {
 	    DefaultClientConfig defaultClientConfig = new DefaultClientConfig();
 		defaultClientConfig.getClasses().add(StringProvider.class);
 		Client client = Client.create(defaultClientConfig);
-		WebResource webResource = client.resource("https://api.api.ai/v1/query?v=20150910");
-	    String mySessionId = actionRequest.getPortletSession().getId();	
-      	String input = "{\"query\":\"" + yourQuery + "\", \"lang\": \"en\", \"sessionId\": \"" + mySessionId + "\"}";
-        ClientResponse response = webResource.header("Content-Type", "application/json").header("Authorization", "Bearer " + authtoken).post(ClientResponse.class, input);  
+		String conversationSession = actionRequest.getPortletSession().getId();
+		System.out.println("We are good 1");
+		WebResource webResource = client.resource("https://dialogflow.googleapis.com/v2/projects/" + dialogflowAgent + "/agent/sessions/" + conversationSession + ":detectIntent");
+       	String input = "{\"query_input\": {\"text\": {\"text\":\"" + yourQuery + "\",  \"language_code\": \"en-US\" }}}";
+      	ClientResponse response = webResource.header("Content-Type", "application/json").header("Authorization", "Bearer " + authtoken).post(ClientResponse.class, input);  
         //parse the JSON response
         JSONParser parser = new JSONParser();   
     	//get the root JSON object
@@ -106,14 +119,19 @@ public class AiMVCActionCommand  extends BaseMVCActionCommand {
 		
 		try {
 			json = (JSONObject) parser.parse(response.getEntity(String.class));
-			JSONObject jsonRes = (JSONObject) json.get("result");
+			JSONObject jsonRes = (JSONObject) json.get("queryResult");
 			result = jsonRes.toString();	
 			//get the action sometimes known as the intent
 			action = (String) jsonRes.get("action");
-			//get the speech, the response string of the robot from the API.AI fulfillment JSON object
-			JSONObject jsonResFulfillment = (JSONObject)  jsonRes.get("fulfillment");
-			fulfillment = jsonResFulfillment.toString();
-			speech = (String) jsonResFulfillment.get("speech");
+			fulfillment = (String) jsonRes.get("action");
+			result = (String) jsonRes.get("action");			
+			
+			JSONArray jsonResFulfillment = (JSONArray)  jsonRes.get("fulfillmentMessages");
+			JSONObject firstObject = (JSONObject) jsonResFulfillment.get(0);
+			JSONObject text1Object = (JSONObject) firstObject.get("text");
+			JSONArray textArray = (JSONArray) text1Object.get("text");
+			speech = textArray.get(0).toString();
+			
 			_apiAiDataLocalService.addApiAiData(serviceContext, yourQuery, authtoken, speech, action, fulfillment, result);	
 			ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			actionRequest.setAttribute("buttonText", "blank");
