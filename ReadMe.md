@@ -1,4 +1,4 @@
-## Liferay MVC Chatbot  "Ask Ray"
+## Liferay MVC Chatbot  "Ask Ray" upgraded to Liferay 7.3
 
 This is a chatbot integrated to DialogFlow Google's NLP engine. There are three versions of the chatbot both in my GitHub. This one is a common or garden Liferay MVC Portlet . You can have a conversation with it and it will draw a simple graph using ChartJS below. Ask it "How can I create a blog" by either typing or literally speaking to it. You will need to setup your own DialogFlow chatbot Agent.
 

@@ -6,7 +6,6 @@
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@page import="ai.config.AiConfiguration"%>
 <%@page import="com.liferay.portal.kernel.util.Validator"%>
-<%@page import="com.liferay.portal.kernel.util.StringPool"%>
 <%@page import="com.liferay.portal.kernel.util.Constants"%>
 <%@page import="com.liferay.kris.dialogflow.model.ApiAiData"%>
 <%@page import="java.util.List"%>
@@ -21,13 +20,13 @@
 <%
 AiConfiguration aiConfiguration = (AiConfiguration) 	renderRequest.getAttribute(AiConfiguration.class.getName());
 
-	String dialogflowAgent = StringPool.BLANK;
-	String numberOfRecordsDisplayed = StringPool.BLANK;
-	String sortOrder = StringPool.BLANK;
-	String youClass = StringPool.BLANK;
-	String rayClass = StringPool.BLANK;
-	String useTimeline = StringPool.BLANK;
-	String centerTimeline = StringPool.BLANK;
+	String dialogflowAgent = "";
+	String numberOfRecordsDisplayed = "";
+	String sortOrder = "";
+	String youClass = "";
+	String rayClass = "";
+	String useTimeline = "";
+	String centerTimeline = "";
 
 	if (Validator.isNotNull(aiConfiguration)) {
 		dialogflowAgent = portletPreferences.getValue("dialogflowAgent", aiConfiguration.dialogflowAgent());
